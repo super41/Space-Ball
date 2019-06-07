@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetCoin : MonoBehaviour
-{   
-    PlayerController controller;  
+{
+    PlayerController controller;
     // Start is called before the first frame update
     void Start()
     {
-        controller =FindObjectOfType<PlayerController>();
+        controller = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -22,8 +22,15 @@ public class TargetCoin : MonoBehaviour
         PlayerCharacter character = other.GetComponent<PlayerCharacter>();
         if (character != null)
         {
-            AudioHelper.GetInstance().PlayGameOverClip(transform.position);   
-            controller.ShowGamePassUI();         
+            AudioHelper.GetInstance().PlayGameOverClip(transform.position);
+            if (LevelConfig.CUR_LEVEL == LevelConfig.FINAL_LEVEL)
+            {
+                controller.ShowGamePassFinalUI();
+            }
+            else
+            {
+                controller.ShowGamePassUI();
+            }
         }
     }
 }

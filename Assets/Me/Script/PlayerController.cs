@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public ScroolRocker scroolRocker;
     int dieY = -30;
 
+  
+
     void Awake()
     {
         playerCharacter = FindObjectOfType<PlayerCharacter>();
@@ -23,7 +25,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        UpdateCoin();
+        UpdateSkillIcon();
     }
 
     // Update is called once per frame
@@ -63,6 +66,10 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Rush();
+        }
 
         if (transform.position.y < dieY)
         {
@@ -73,7 +80,13 @@ public class PlayerController : MonoBehaviour
     public void AddCoin()
     {
         playerCharacter.AddCoin();
-        playerHUD.UpdateCoinCount("硬币: " + playerCharacter.GetCoin().ToString());
+        UpdateCoin();
+    }
+
+    private void UpdateCoin()
+    {
+        playerHUD.UpdateCurCoinCount("硬币: " + playerCharacter.GetCoin().ToString());
+        playerHUD.UpdateAllCoinCount("总硬币: " + PlayerPrefsHelper.GetInstance().GetCoinCount());
     }
 
     private void GameOver()
@@ -89,8 +102,43 @@ public class PlayerController : MonoBehaviour
         playerHUD.ShowGamePassUI();
     }
 
+    public void ShowGamePassFinalUI(){
+        playerHUD.ShowGamePassFinalUI();
+    }
+
     public void Jump()
     {
         playerCharacter.Jump();
+    }
+
+    public void Rush()
+    {
+        playerCharacter.Rush();
+    }
+
+
+    public void StudyRushSkill()
+    {
+        PlayerPrefsHelper.GetInstance().SetStudyRunSkill(true);
+    }
+
+    public void ShowHintStudyRushSkill(){
+        playerHUD.ShowHintStudyRush();
+    }
+
+    public void ShowHintStudyDoubleJumpSkill(){
+        playerHUD.ShowHintStudyDoubleJumpSkill();
+    }
+    
+    public void StudyDoubleJumpSkill(){
+        PlayerPrefsHelper.GetInstance().SetStudyDoubleJump(true);
+    }
+
+
+    public void UpdateSkillIcon(){
+        bool isStudyRush = PlayerPrefsHelper.GetInstance().GetIsStudyRushSkill();
+        int jumpLevel  = PlayerPrefsHelper.GetInstance().GetJumpLevel();
+        playerHUD.ShowRushSkillIcon(isStudyRush);
+        playerHUD.UpdateJumpIcon(jumpLevel);
     }
 }
