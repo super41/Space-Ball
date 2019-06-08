@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class StartGame : MonoBehaviour
 {
     // Start is called before the first frame update
- 
+    public GameObject helpDeatil;
 
     public void OnClick_Start(){
         LevelConfig.CUR_LEVEL = 1;
@@ -13,5 +13,13 @@ public class StartGame : MonoBehaviour
     }
     public void OnClick_Reset(){
         PlayerPrefs.DeleteAll();
+    }
+
+    public void OnClick_HelpDetail(){
+        helpDeatil.SetActive(true);
+    }
+
+    public void OnClick_ExitHelp(){
+         helpDeatil.SetActive(false);
     }
 }

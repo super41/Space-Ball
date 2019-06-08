@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public ScroolRocker scroolRocker;
     int dieY = -30;
 
-  
+
 
     void Awake()
     {
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateCoin();
         UpdateSkillIcon();
+        scroolRocker.gameObject.SetActive(DeviceConfig.isAndroid());
     }
 
     // Update is called once per frame
@@ -64,9 +65,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && PlayerPrefsHelper.GetInstance().GetIsStudyRushSkill())
         {
             Rush();
         }
@@ -76,6 +78,7 @@ public class PlayerController : MonoBehaviour
             GameOver();
         }
     }
+    int i = 0;
 
     public void AddCoin()
     {
@@ -102,12 +105,14 @@ public class PlayerController : MonoBehaviour
         playerHUD.ShowGamePassUI();
     }
 
-    public void ShowGamePassFinalUI(){
+    public void ShowGamePassFinalUI()
+    {
         playerHUD.ShowGamePassFinalUI();
     }
 
     public void Jump()
     {
+        Debug.Log("GetKeyDown jump " + (++i));
         playerCharacter.Jump();
     }
 
@@ -122,23 +127,28 @@ public class PlayerController : MonoBehaviour
         PlayerPrefsHelper.GetInstance().SetStudyRunSkill(true);
     }
 
-    public void ShowHintStudyRushSkill(){
+    public void ShowHintStudyRushSkill()
+    {
         playerHUD.ShowHintStudyRush();
     }
 
-    public void ShowHintStudyDoubleJumpSkill(){
+    public void ShowHintStudyDoubleJumpSkill()
+    {
         playerHUD.ShowHintStudyDoubleJumpSkill();
     }
-    
-    public void StudyDoubleJumpSkill(){
+
+    public void StudyDoubleJumpSkill()
+    {
         PlayerPrefsHelper.GetInstance().SetStudyDoubleJump(true);
     }
 
 
-    public void UpdateSkillIcon(){
+    public void UpdateSkillIcon()
+    {
         bool isStudyRush = PlayerPrefsHelper.GetInstance().GetIsStudyRushSkill();
-        int jumpLevel  = PlayerPrefsHelper.GetInstance().GetJumpLevel();
-        playerHUD.ShowRushSkillIcon(isStudyRush);
+        int jumpLevel = PlayerPrefsHelper.GetInstance().GetJumpLevel();
+        playerHUD.ShowRushSkillIcon(isStudyRush && DeviceConfig.isAndroid());
         playerHUD.UpdateJumpIcon(jumpLevel);
+        playerHUD.ShowJumpIcon(DeviceConfig.isAndroid());
     }
 }

@@ -1227,7 +1227,8 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1555381995, guid: 6b02698abf783b2428ccbd3064f8d0ac, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6b02698abf783b2428ccbd3064f8d0ac, type: 3}
 --- !u!4 &504366842 stripped
 Transform:
@@ -8514,12 +8515,12 @@ PrefabInstance:
     - target: {fileID: 4088137303548346601, guid: 44bbc195c3c539048944c0bf61ab1239,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000106317595
+      value: 0.000026801461
       objectReference: {fileID: 0}
     - target: {fileID: 4088137303548346601, guid: 44bbc195c3c539048944c0bf61ab1239,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000033296474
+      value: 0.000011148946
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44bbc195c3c539048944c0bf61ab1239, type: 3}

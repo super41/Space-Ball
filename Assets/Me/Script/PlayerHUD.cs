@@ -17,7 +17,8 @@ public class PlayerHUD : MonoBehaviour
     public GameObject rushSkillIcon;
     PlayerController controller;
     public Animator animStudyRush_1;
-    public Animator animStudyRush_2;
+    public Animator animStudyRush_2_Pc;
+    public Animator animStudyRush_2_Android;
     public Animator animStudyDoubleJump_1;
     public Animator animStudyDoubleJump_2;
 
@@ -120,26 +121,41 @@ public class PlayerHUD : MonoBehaviour
         image.color = newColor;
     }
 
+    public void ShowJumpIcon(bool isShow)
+    {
+        jumpIcon.SetActive(isShow);
+    }
+
     public void ShowHintStudyRush()
     {
         StopCoroutine("ShowHintStudyRushIE");
         StartCoroutine("ShowHintStudyRushIE");
     }
 
-    public void ShowHintStudyDoubleJumpSkill(){
+    public void ShowHintStudyDoubleJumpSkill()
+    {
         StopCoroutine("ShowHintStudyDoubleJumpIE");
         StartCoroutine("ShowHintStudyDoubleJumpIE");
     }
 
     private IEnumerator ShowHintStudyRushIE()
-    {   
+    {
         animStudyRush_1.SetTrigger("study_rush_skill");
         yield return new WaitForSeconds(2);
-        animStudyRush_2.SetTrigger("study_rush_skill");
+        if (DeviceConfig.isAndroid())
+        {
+            animStudyRush_2_Android.SetTrigger("study_rush_skill");
+        }
+        else
+        {
+            animStudyRush_2_Pc.SetTrigger("study_rush_skill");
+        }
+
 
     }
 
-    private IEnumerator ShowHintStudyDoubleJumpIE(){
+    private IEnumerator ShowHintStudyDoubleJumpIE()
+    {
         animStudyDoubleJump_1.SetTrigger("study_rush_skill");
         yield return new WaitForSeconds(2);
         animStudyDoubleJump_2.SetTrigger("study_rush_skill");

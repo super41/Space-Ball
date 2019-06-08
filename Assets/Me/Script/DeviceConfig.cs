@@ -9,4 +9,8 @@ public class DeviceConfig
     public static int CUR_DEVICE = DEVICE_ANDROID;
     public const int DEVICE_PC = 0;
     public const int DEVICE_ANDROID = 1;
+
+    public static bool isAndroid(){
+            return CUR_DEVICE == DEVICE_ANDROID;
+    }
 }

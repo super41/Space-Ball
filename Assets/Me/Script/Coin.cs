@@ -19,10 +19,7 @@ public class Coin : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+  
 
     /// <summary>
     /// OnTriggerEnter is called when the Collider other enters the trigger.
